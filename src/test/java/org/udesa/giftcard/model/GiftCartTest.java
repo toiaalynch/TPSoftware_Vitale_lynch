@@ -44,4 +44,24 @@ public class GiftCartTest {
                 () -> new GiftCard(100).aplicarCargo(200, "Zara"));
     }
 
+    @Test
+    public void test07multipleChargesReduceBalanceAndRegisterMovements() {
+        GiftCard card = new GiftCard(1000);
+        card.aplicarCargo(200, "Zara");
+        card.aplicarCargo(300, "Starbucks");
+        assertEquals(500, card.getSaldo());
+        assertEquals(2, card.getMovimientos().size());
+        assertEquals("Starbucks", card.getMovimientos().get(1).getMerchant());
+        assertEquals(300, card.getMovimientos().get(1).getMonto());
+    }
+
+    @Test
+    public void test08chargeEqualToBalanceEmptiesCard() {
+        GiftCard card = new GiftCard(200);
+        card.aplicarCargo(200, "Zara");
+        assertEquals(0, card.getSaldo());
+        assertTrue(card.isEmpty());
+    }
 }
+
+
