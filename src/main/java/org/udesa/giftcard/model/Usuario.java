@@ -33,4 +33,9 @@ public class Usuario {
         }
         return giftCards;
     }
+
+    public Object getUsername() {
+        return username;
+
+    }
 }
